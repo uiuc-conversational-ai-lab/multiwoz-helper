@@ -1,0 +1,9 @@
+numpy
+nltk
+scipy
+tqdm
+fuzzywuzzy
+python-Levenshtein
+lexical-diversity
+sacrebleu
+sacremoses

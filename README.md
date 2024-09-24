@@ -21,6 +21,6 @@ python 3.12 or later
 
 ## Evaluate
 ```console
-❱❱❱ python evaluate.py -v=<version> -m=<mode> -d -b -r -s -i=<input_file> -o=<output_file>
+❱❱❱ python evaluate.py -v=<version> -m=<mode> -b -s -r -d -i=<input_file.json> -o=<output_file.json>
 ```
-The default value of version and mode is 2.4 and test, respectively. The input_file must contain generated responses and/or belief states. See the [`predictions`](predictions) folder for sample input files.
+The default values for version and mode are 2.4 and test, respectively. The input_file must include generated responses and/or belief states. For sample input files, refer to the [`predictions`](predictions) folder.

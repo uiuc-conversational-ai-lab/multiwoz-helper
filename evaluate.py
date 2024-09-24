@@ -30,9 +30,14 @@ if __name__ == '__main__':
     with open(args.input, 'r') as f:
         input_data = json.load(f)
 
+    #Fixing dialog_id format
+    inp_data = {}
+    for dialog_id in input_data:
+        did = dialog_id.split(".json")[0].lower()
+        inp_data[did] = input_data[dialog_id]
+
     e = Evaluator(args.mwz_ver, args.mode, args.bleu, args.success, args.richness, args.dst, args.fuzzy_ratio)
-    #exit(0)
-    results = e.evaluate(input_data)
+    results = e.evaluate(inp_data)
 
     for metric, values in results.items():
         if values is not None:

@@ -38,8 +38,7 @@ class MultiWOZVenueDatabase:
         for domain in ["restaurant", "attraction", "hotel", "train"]:
            
             dir_path = os.path.dirname(os.path.realpath(__file__))
-            #with open(os.path.join(dir_path, "data", "database", f"{domain}_db.json"), "r") as f:
-            with open(os.path.join("db", f"{domain}_db.json"), "r") as f:
+            with open(os.path.join(dir_path, "data", "database", f"{domain}_db.json"), "r") as f:
                 database_data[domain] = json.load(f)
             
             if domain in self.IGNORE_VALUES:

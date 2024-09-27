@@ -48,7 +48,7 @@ class Evaluator:
         normalize_data(input_data)
         return {
             "bleu"     : get_bleu(original_input, self.reference_dialogs)                             if self.bleu else None,
-            "success"  : get_success(input_data, self.database, self.goals, self.booked_domains)  if self.success else None,
+            "success"  : get_success(input_data, self.database, self.goals, self.booked_domains, self.mwz_ver)  if self.success else None,
             "richness" : get_richness(input_data)                                                 if self.richness else None,
             "dst"      : get_dst(original_input, self.gold_states, self.fuzzy_ratio, self.mwz_ver)         if self.dst else None,
         }
@@ -108,7 +108,7 @@ def get_richness(input_data):
     }
 
 
-def get_success(input_data, database, goals, booked_domains):
+def get_success(input_data, database, goals, booked_domains, mwz_ver):
     """ Get Inform and Success rates of given dialogs, evaluate multiple setups: 
         1) Use predicted dialog state (if available, otherwise skip)
         2) Use ground-truth dialog state

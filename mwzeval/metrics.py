@@ -47,10 +47,10 @@ class Evaluator:
         original_input = copy.deepcopy(input_data)
         normalize_data(input_data)
         return {
-            "bleu"     : get_bleu(original_input, self.reference_dialogs)                             if self.bleu else None,
-            "success"  : get_success(input_data, self.database, self.goals, self.booked_domains)  if self.success else None,
-            "richness" : get_richness(input_data)                                                 if self.richness else None,
-            "dst"      : get_dst(original_input, self.gold_states, self.fuzzy_ratio, self.mwz_ver)         if self.dst else None,
+            "bleu"     : get_bleu(original_input, self.reference_dialogs)                                                  if self.bleu else None,
+            "success"  : get_success(input_data, self.database, self.goals, self.booked_domains, self.mwz_ver, self.mode)  if self.success else None,
+            "richness" : get_richness(input_data)                                                                          if self.richness else None,
+            "dst"      : get_dst(original_input, self.gold_states, self.fuzzy_ratio, self.mwz_ver)                         if self.dst else None,
         }
 
 def get_bleu(input_data, reference_dialogs):
@@ -108,7 +108,7 @@ def get_richness(input_data):
     }
 
 
-def get_success(input_data, database, goals, booked_domains):
+def get_success(input_data, database, goals, booked_domains, mwz_ver, mode):
     """ Get Inform and Success rates of given dialogs, evaluate multiple setups: 
         1) Use predicted dialog state (if available, otherwise skip)
         2) Use ground-truth dialog state
@@ -119,7 +119,7 @@ def get_success(input_data, database, goals, booked_domains):
     if not has_state_predictions(input_data):
         #sys.stderr.write('warning: Missing state predictions, using ground-truth dialog states from MultiWOZ 2.2!\n')
         #states = load_gold_states()  
-        states = load_belief_state(mwz_ver)
+        states = load_belief_state(mwz_ver, mode)
         for dialog_id in input_data:
             for i, turn in enumerate(input_data[dialog_id]):
                 turn["state"] = states[dialog_id][i]

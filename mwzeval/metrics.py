@@ -50,7 +50,7 @@ class Evaluator:
             "bleu"     : get_bleu(original_input, self.reference_dialogs)                                                  if self.bleu else None,
             "success"  : get_success(input_data, self.database, self.goals, self.booked_domains, self.mwz_ver, self.mode)  if self.success else None,
             "richness" : get_richness(input_data)                                                                          if self.richness else None,
-            "dst"      : get_dst(original_input, self.gold_states, self.fuzzy_ratio, self.mwz_ver)                         if self.dst else None,
+            "dst"      : get_dst(original_input, self.gold_states, self.fuzzy_ratio)                                       if self.dst else None,
         }
 
 def get_bleu(input_data, reference_dialogs):
@@ -262,7 +262,7 @@ def get_dialog_success(goal, booked_domains, utterances, states, domain_estimate
     return match, success
 
 
-def get_dst(input_data, reference_states, fuzzy_ratio, mwz_ver):
+def get_dst(input_data, reference_states, fuzzy_ratio):
     """ Get dialog state tracking results: joint accuracy (exact state match), slot F1, precision and recall """
     
     def flatten(state_dict):

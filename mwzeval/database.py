@@ -92,9 +92,9 @@ class MultiWOZVenueDatabase:
                         break
                 else:
                     if k in self.FUZZY_KEYS.get(domain, {}):
-                        f = (lambda x: fuzz.partial_ratio(item[k], x) < fuzzy_ratio)
+                        f = (lambda x: fuzz.partial_ratio(normalize_state_slot_value(k, item[k]), x) < fuzzy_ratio)
                     else:
-                        f = (lambda x: item[k] != x)
+                        f = (lambda x: normalize_state_slot_value(k, item[k]) != x)
                     if f(v):
                         break
             else:
